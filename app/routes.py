@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash
+from flask import (render_template, redirect, flash, url_for)
 from app import app
 from app.forms import LoginForm
 
@@ -24,5 +24,5 @@ def signin():
     if login_form.validate_on_submit():
         flash(f'Login was successful for user {login_form.username.data},'
               f' remember_me={login_form.remember_me.data}')
-        return redirect('/index')
+        return redirect(url_for('index'))
     return render_template('login.html', form=login_form, title="Login")

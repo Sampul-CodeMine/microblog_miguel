@@ -7,19 +7,15 @@
 </head>
 <body>
     <header>
-        Microblog: <a href="/index">Home</a> | <a href="/signin">Login</a>
+        Microblog: <a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('signin') }}">Login</a>
     </header>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+    <hr>{% with messages = get_flashed_messages() %}{% if messages %}
     <div>
         <ul>
             {% for message in messages %}
             <li>{{ message }}</li>
             {% endfor %}
         </ul>
-    </div>
-    {% endif %}
-    {% endwith %}{% block content %}{% endblock %}
+    </div>{% endif %}{% endwith %}{% block content %}{% endblock %}
 </body>
 </html>
