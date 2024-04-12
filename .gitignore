@@ -1,0 +1,6 @@
+venv
+app.db
+microblog.log*
+
+__pycache__/*
+**/__pycache__/*
