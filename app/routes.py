@@ -1,11 +1,19 @@
 from flask import (render_template, redirect, flash, url_for, request)
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, EditProfileForm
 from flask_login import (current_user, login_user, logout_user,
                          login_required)
 import sqlalchemy as sa
 from app import app, db
 from app.models import User
 from urllib.parse import urlsplit
+from datetime import datetime, timezone
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.now(timezone.utc)
+        db.session.commit()
 
 
 @app.route('/', strict_slashes=False)
@@ -67,3 +75,38 @@ def signup():
         return redirect(url_for('signin'))
     return render_template('register.html', form=signup_form,
                            title="Register")
+
+
+@app.route('/user/<username>', strict_slashes=False)
+@login_required
+def profile(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    posts = [
+        {
+            'author': user,
+            'body': 'Beautiful day in Nigeria!'
+        },
+        {
+            'author': user,
+            'body': 'I love Wrestlemania XL!'
+        }
+    ]
+    return render_template('user.html', title='Profile',
+                           user=user, posts=posts)
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def edit_profile():
+    user = current_user.username
+    edit_form = EditProfileForm()
+    if edit_form.validate_on_submit():
+        current_user.username = edit_form.username.data
+        current_user.about_me = edit_form.about_me.data
+        db.session.commit()
+        flash('Your profile was successfully updated.')
+        return redirect(url_for('profile', username=user))
+    elif request.method == 'GET':
+        edit_form.username.data = current_user.username
+        edit_form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title='Profile Update', form=edit_form)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {%block content %}
     <h1>Hello, {{ current_user.username|capitalize }}!</h1>
+    <hr>
     <div>{% for post in posts %}
         <div>
             <p>{{ post.author.username }} says: <strong>{{ post.body }}</strong></p>
