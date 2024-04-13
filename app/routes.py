@@ -1,11 +1,17 @@
-from flask import (render_template, redirect, flash, url_for)
-from app import app
-from app.forms import LoginForm
+from flask import (render_template, redirect, flash, url_for, request)
+from app.forms import LoginForm, RegisterForm
+from flask_login import (current_user, login_user, logout_user,
+                         login_required)
+import sqlalchemy as sa
+from app import app, db
+from app.models import User
+from urllib.parse import urlsplit
+
 
 @app.route('/', strict_slashes=False)
 @app.route('/index', strict_slashes=False)
+@login_required
 def index():
-    user = {'username': 'Dukeson'}
     posts = [
         {
             'author': {'username': 'John'},
@@ -16,13 +22,48 @@ def index():
             'body': 'I love Wrestlemania XL!'
         }
     ]
-    return render_template('index.html', title='Home', user=user, posts=posts)
+    return render_template('index.html', title='Home', posts=posts)
+
 
 @app.route('/signin', strict_slashes=False, methods=['GET', 'POST'])
 def signin():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     login_form = LoginForm()
     if login_form.validate_on_submit():
+        user = db.session.scalar(
+            sa.select(User).where(User.username == login_form.username.data))
+        if user is None or not user.check_password(login_form.password.data):
+            flash('Invalid username or password.')
+            return redirect(url_for('signin'))
+        login_user(user, remember=login_form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or urlsplit(next_page).netloc != '':
+            next_page = url_for('index')
         flash(f'Login was successful for user {login_form.username.data},'
               f' remember_me={login_form.remember_me.data}')
-        return redirect(url_for('index'))
+        return redirect(next_page)
     return render_template('login.html', form=login_form, title="Login")
+
+
+@app.route('/signout', strict_slashes=False)
+def signout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@app.route('/signup', strict_slashes=False, methods=['GET', 'POST'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    signup_form = RegisterForm()
+    if signup_form.validate_on_submit():
+        user = User(username=signup_form.username.data,
+                    email=signup_form.email.data)
+        user.set_password(signup_form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your registration was successful. Login to your account.')
+        return redirect(url_for('signin'))
+    return render_template('register.html', form=signup_form,
+                           title="Register")

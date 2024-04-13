@@ -59,3 +59,28 @@ INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
 INFO  [alembic.runtime.migration] Running upgrade  -> 16ba27a02d54, Create Users Table
 (venv) $
 ```
+
+## Creating User Login and Password Hashing
+
+When creating a user login system, it is necessary you always remember never to store plain-texted passwords as provided by the users in your database.
+
+That is why we will be using the functionalities from the package `Werkzeug`.
+
+```shell
+(venv) $ flask shell
+Python 3.8.10 (default, Nov 22 2023, 10:22:35) 
+[GCC 9.4.0] on linux
+App: app
+Instance: /home/tester/microblog/instance
+>>> from werkzeug.security import generate_password_hash
+>>> hash = generate_password_hash('tester')
+>>> hash
+'pbkdf2:sha256:600000$RAoKQOzQ7okWzu4I$508494e124f3004db2527e59b654a75d64998109836611501f463eca77353df2'
+>>> from werkzeug.security import check_password_hash
+>>> check_password_hash(hash, 'testar')
+False
+>>> check_password_hash(hash, 'tester')
+True
+>>> 
+```
+
