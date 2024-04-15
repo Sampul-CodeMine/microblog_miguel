@@ -99,7 +99,7 @@ def profile(username):
 @login_required
 def edit_profile():
     user = current_user.username
-    edit_form = EditProfileForm()
+    edit_form = EditProfileForm(current_user.username)
     if edit_form.validate_on_submit():
         current_user.username = edit_form.username.data
         current_user.about_me = edit_form.about_me.data
