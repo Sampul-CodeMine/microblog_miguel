@@ -4,3 +4,4 @@ microblog.log*
 
 __pycache__/*
 **/__pycache__/*
+.flaskenv_real
