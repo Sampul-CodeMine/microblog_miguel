@@ -23,7 +23,8 @@
                 {{ form.remember_me() }} {{ form.remember_me.label }}
             </div>
             <div>
-                {{ form.login() }} | <span>New User? <a href="{{ url_for('signup') }}">Click to Register!</a></span>
+                {{ form.login() }} | <span><a href="{{ url_for('reset_password_request') }}">Forgot Password?</a></span>
+                <p><span>New User? <a href="{{ url_for('signup') }}">Click to Register!</a></span></p>
             </div>
         </form>
         
