@@ -1,9 +1,9 @@
 FLASK_APP=microblog.py
 FLASK_DEBUG=0
-FLASK_SECRET_KEY='+h!$!$m^f!r$+$3cr3+c0d3'
+FLASK_SECRET_KEY='secret_key'
 DATBASE_URL=app.db
 MAIL_SERVER=smtp.gmail.com
 MAIL_PORT=587
 MAIL_USE_TLS=True
-MAIL_USERNAME='studysampul@gmail.com'
-MAIL_PASSWORD=''
+MAIL_USERNAME='sample@email.com'
+MAIL_PASSWORD='tester123'
