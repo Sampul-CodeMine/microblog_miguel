@@ -28,7 +28,7 @@ def index():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post was submitted and it is now live!')
+        flash('Your post was submitted and it is now live!', 'success')
         return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
     posts = db.paginate(current_user.following_posts(), page=page,
@@ -66,14 +66,13 @@ def signin():
         user = db.session.scalar(
             sa.select(User).where(User.username == login_form.username.data))
         if user is None or not user.check_password(login_form.password.data):
-            flash('Invalid username or password.')
+            flash('Invalid username or password.', 'danger')
             return redirect(url_for('signin'))
         login_user(user, remember=login_form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or urlsplit(next_page).netloc != '':
             next_page = url_for('index')
-        flash(f'Login was successful for user {login_form.username.data},'
-              f' remember_me={login_form.remember_me.data}')
+        flash(f'Login attempt was successful.', 'success')
         return redirect(next_page)
     return render_template('login.html', form=login_form, title="Login")
 
@@ -81,6 +80,7 @@ def signin():
 @app.route('/signout', strict_slashes=False)
 def signout():
     logout_user()
+    flash('You have successfully logged out.', 'success')
     return redirect(url_for('index'))
 
 
@@ -95,7 +95,7 @@ def signup():
         user.set_password(signup_form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Your registration was successful. Login to your account.')
+        flash('Your registration was successful. Login to your account.', 'success')
         return redirect(url_for('signin'))
     return render_template('register.html', form=signup_form,
                            title="Register")
@@ -127,7 +127,7 @@ def edit_profile():
         current_user.username = edit_form.username.data
         current_user.about_me = edit_form.about_me.data
         db.session.commit()
-        flash('Your profile was successfully updated.')
+        flash('Your profile was successfully updated.','success')
         return redirect(url_for('index'))
     elif request.method == 'GET':
         edit_form.username.data = current_user.username
@@ -142,14 +142,14 @@ def follow(username):
     if form.validate_on_submit():
         user = db.session.scalar(sa.select(User).where(User.username == username))
         if user is None:
-            flash(f'User {username} not found!')
+            flash(f'User {username} not found!', 'warning')
             return redirect(url_for('index'))
         if user == current_user:
-            flash('You cannot follow yourself.')
+            flash('You cannot follow yourself.', 'warning')
             return redirect(url_for('profile', username=username))
         current_user.follow(user)
         db.session.commit()
-        flash(f'You are now following {username}!')
+        flash(f'You are now following {username}!', 'info')
         return redirect(url_for('profile', username=username))
     else:
         return redirect(url_for('index'))
@@ -162,14 +162,14 @@ def unfollow(username):
     if form.validate_on_submit():
         user = db.session.scalar(sa.select(User).where(User.username == username))
         if user is None:
-            flash(f'User {username} not found!')
+            flash(f'User {username} not found!', 'warning')
             return redirect(url_for('index'))
         if user == current_user:
-            flash('You cannot unfollow yourself.')
+            flash('You cannot unfollow yourself.', 'warning')
             return redirect(url_for('profile', username=username))
         current_user.unfollow(user)
         db.session.commit()
-        flash(f'You are no longer following {username}!')
+        flash(f'You are no longer following {username}!', 'info')
         return redirect(url_for('profile', username=username))
     else:
         return redirect(url_for('index'))
@@ -187,7 +187,7 @@ def reset_password_request():
         )
         if user:
             send_password_reset_email(user)
-        flash('Check you email for the instructions to reset your password.')
+        flash('Check you email for the instructions to reset your password.', 'info')
         return redirect(url_for('signin'))
     return render_template('request_password_reset.html', title="Reset Password", form=form)
 
@@ -204,6 +204,6 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash('Your password has been reset.', 'success')
         return redirect(url_for('signin'))
     return render_template('reset_password.html', form=form)

@@ -4,23 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microblog{% if title %} | {{ title }}{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <header>
-        Microblog:
-        <a href="{{ url_for('index') }}">Home</a>&nbsp;| <a href="{{ url_for('explore') }}">Explore</a> 
-        {% if current_user.is_anonymous %} | <a href="{{ url_for('signin') }}">Login</a> | <a href="{{ url_for('signup') }}">Register</a>
-        {% else %}
-| <a href="{{ url_for('profile', username=current_user.username) }}">Profile</a> | <a href="{{ url_for('signout') }}">Logout</a> 
-        {% endif %}
-    </header>
-    <hr>{% with messages = get_flashed_messages() %}{% if messages %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav" aria-controls="collapseNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapseNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">Explore</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                {% if current_user.is_anonymous %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('signin') }}">Login</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('profile', username=current_user.username) }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url_for('signout') }}">Logout</a>
+                    </li>
+                  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=True) %}{% if messages %}{% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{ message|e }}
+        </div>
+        {% endfor %}{% endif %}{% endwith %}
+        {% block content %}{% endblock %}
+    </div>
     <div>
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    </div>{% endif %}{% endwith %}{% block content %}{% endblock %}
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    </div>
 </body>
 </html>
