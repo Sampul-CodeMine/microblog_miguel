@@ -11,7 +11,7 @@
                 {{ post.author.username|capitalize }}
             </a>
            {% endset %}
-           {{ _('%(username)s said %(when)s', username=user_ink, when=moment(post.timestamp).fromNow()) }}<br>{{ post.body }}
+           {{ _('%(username)s said %(when)s', username=user_link, when=moment(post.timestamp).fromNow()) }}<br>{{ post.body }}
         </td>
     </tr>
 </table>

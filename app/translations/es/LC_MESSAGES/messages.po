@@ -1,0 +1,280 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-05-25 17:22+0100\n"
+"PO-Revision-Date: 2024-05-25 16:44+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#: app/__init__.py:24
+msgid "Please log in to access this page."
+msgstr "Por favor inicie sesión para acceder a esta página."
+
+#: app/email.py:22
+msgid "[MicroBlog] Reset Your Password"
+msgstr "[Microblog] Restablecer su contraseña"
+
+#: app/forms.py:13 app/forms.py:20 app/forms.py:42
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: app/forms.py:14 app/forms.py:22
+msgid "Password"
+msgstr "Contraseña"
+
+#: app/forms.py:15
+msgid "Remember Me"
+msgstr "Acuérdate de mí"
+
+#: app/forms.py:16 app/templates/login.html:4
+msgid "Sign In"
+msgstr "Iniciar sesión"
+
+#: app/forms.py:21 app/forms.py:68
+msgid "Email ID"
+msgstr "Identificación de correo"
+
+#: app/forms.py:23 app/forms.py:74
+msgid "Confirm Password"
+msgstr "confirmar Contraseña"
+
+#: app/forms.py:26 app/templates/register.html:4
+msgid "Sign Up"
+msgstr "Inscribirse"
+
+#: app/forms.py:32 app/forms.py:54
+msgid "Please use a different username."
+msgstr "Utilice un nombre de usuario diferente."
+
+#: app/forms.py:38
+msgid "Please use a different email address."
+msgstr "Por favor utilice una dirección de correo electrónico diferente."
+
+#: app/forms.py:43
+msgid "About Me"
+msgstr "Acerca de mí"
+
+#: app/forms.py:44
+msgid "Update"
+msgstr "Actualizar"
+
+#: app/forms.py:58
+msgid "Submit"
+msgstr "Entregar"
+
+#: app/forms.py:62
+msgid "Say something"
+msgstr "Di algo"
+
+#: app/forms.py:64
+msgid "Post"
+msgstr "Correo"
+
+#: app/forms.py:69 app/templates/request_password_reset.html:4
+msgid "Request Password Reset"
+msgstr "Petición para la recuperación de contraseña"
+
+#: app/forms.py:73
+msgid "New Password"
+msgstr "Nueva contraseña"
+
+#: app/forms.py:76 app/routes.py:194
+msgid "Reset Password"
+msgstr "Restablecer la contraseña"
+
+#: app/routes.py:33
+msgid "Your post was submitted and it is now live!"
+msgstr "Tu publicación fue enviada y ahora está disponible!"
+
+#: app/routes.py:42 app/templates/base.html:20
+msgid "Home"
+msgstr "Hogar"
+
+#: app/routes.py:58 app/templates/base.html:23
+msgid "Explore"
+msgstr "Explorar"
+
+#: app/routes.py:71
+msgid "Invalid username or password."
+msgstr "Usuario o contraseña invalido."
+
+#: app/routes.py:79 app/templates/base.html:29
+msgid "Login"
+msgstr "Acceso"
+
+#: app/routes.py:85
+msgid "You have successfully logged out."
+msgstr "Has terminado tu sesion satisfactoriamente."
+
+#: app/routes.py:100
+msgid "Your registration was successful. Login to your account."
+msgstr "Su registro fue exitoso. Ingrese a su cuenta."
+
+#: app/routes.py:103
+msgid "Register"
+msgstr "Registro"
+
+#: app/routes.py:132
+msgid "Your profile was successfully updated."
+msgstr "Su perfil se actualizó exitosamente."
+
+#: app/routes.py:137
+msgid "Profile Update"
+msgstr "Actualización de perfil"
+
+#: app/routes.py:147 app/routes.py:167
+#, python-format
+msgid "User %(username)s not found!"
+msgstr "Usuario %(username)s extraviado!"
+
+#: app/routes.py:150
+msgid "You cannot follow yourself."
+msgstr "No puedes seguirte a ti mismo."
+
+#: app/routes.py:154
+#, python-format
+msgid "You are now following %(username)s!"
+msgstr "Ahora estás siguiendo %(username)s!"
+
+#: app/routes.py:170
+msgid "You cannot unfollow yourself."
+msgstr "No puedes dejar de seguirte"
+
+#: app/routes.py:174
+#, python-format
+msgid "You are no longer following %(username)s!"
+msgstr "Ya no estas siguiendo %(username)s!"
+
+#: app/routes.py:192
+msgid "Check you email for the instructions to reset your password."
+msgstr ""
+"Consulte su correo electrónico para obtener instrucciones para "
+"restablecer su contraseña."
+
+#: app/routes.py:209
+msgid "Your password has been reset."
+msgstr "Tu contraseña ha sido restablecida."
+
+#: app/templates/404.html:3
+msgid "An unexpected error has occurred."
+msgstr "Ha ocurrido un error inesperado."
+
+#: app/templates/404.html:4
+msgid "File Not Found."
+msgstr "Archivo no encontrado."
+
+#: app/templates/404.html:5 app/templates/500.html:5
+msgid "Back"
+msgstr "Atrás"
+
+#: app/templates/500.html:3
+msgid "An unexpected error has occurred"
+msgstr "Ha ocurrido un error inesperado"
+
+#: app/templates/500.html:4
+msgid "The administrator has been notified. Sorry for the inconvenience."
+msgstr ""
+"El administrador ha sido notificado. Lo siento por los inconvenientes "
+"ocasionados."
+
+#: app/templates/_posts.html:14
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s dicho %(when)s"
+
+#: app/templates/base.html:6
+msgid "Microblog"
+msgstr "Microblog"
+
+#: app/templates/base.html:33
+msgid "Profile"
+msgstr "Perfil"
+
+#: app/templates/base.html:36
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: app/templates/edit_profile.html:3
+msgid "Edit Profile"
+msgstr "Editar perfil"
+
+#: app/templates/index.html:4
+#, python-format
+msgid "Hello, %(username)s!"
+msgstr "Hola, %(username)s!"
+
+#: app/templates/index.html:18 app/templates/user.html:38
+msgid "Newer posts"
+msgstr "las publicaciones más nuevas"
+
+#: app/templates/index.html:23 app/templates/user.html:43
+msgid "Older posts"
+msgstr "Publicaciones más antiguas"
+
+#: app/templates/login.html:8
+msgid "Forgot Password?"
+msgstr "Has olvidado tu contraseña?"
+
+#: app/templates/login.html:9
+msgid "New User?"
+msgstr "Nuevo usuario?"
+
+#: app/templates/login.html:9
+msgid "Click to Register!"
+msgstr "Haga clic para registrarse!"
+
+#: app/templates/register.html:8
+msgid "Already Registered?"
+msgstr "Ya registrado?"
+
+#: app/templates/register.html:8
+msgid "Click to Login!"
+msgstr "Haga clic para iniciar sesión!"
+
+#: app/templates/reset_password.html:4
+msgid "Reset Your Password"
+msgstr "Restablecer su contraseña"
+
+#: app/templates/user.html:8
+#, fuzzy, python-format
+msgid "Hello, %(username)s!)"
+msgstr "Hola, %(username)s!"
+
+#: app/templates/user.html:10
+msgid "Last seen on:"
+msgstr "Visto por última vez en:"
+
+#: app/templates/user.html:11
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d seguidores"
+
+#: app/templates/user.html:11
+#, python-format
+msgid "%(count)d following."
+msgstr "%(count)d siguiente"
+
+#: app/templates/user.html:12
+msgid "Update my profile"
+msgstr "Actualizar mi perfil"
+
+#: app/templates/user.html:16
+msgid "Follow"
+msgstr "Seguir"
+
+#: app/templates/user.html:22
+msgid "Unfollow"
+msgstr "Dejar de seguir"
+
