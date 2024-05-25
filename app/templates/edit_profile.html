@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {%block content %}
-    <h1>Edit Profile ({{ current_user.username|capitalize }})</h1>
+    <h1>{{ _('Edit Profile') }} ({{ current_user.username|capitalize }})</h1>
     <hr>
     <div>
         <form action="" method="post">

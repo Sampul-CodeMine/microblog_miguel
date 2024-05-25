@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% import 'bootstrap_wtf.html' as wtf %}
 {%block content %}
-    <h1>Sign Up</h1>
+    <h1>{{ _('Sign Up') }}</h1>
     <hr>
     <div>
         {{ wtf.quick_form(form) }}
-        <span>Already Registered? <a href="{{ url_for('signin') }}">Click to Login!</a></span>
+        <span>{{ _('Already Registered?') }} <a href="{{ url_for('signin') }}">{{ _('Click to Login!') }}</a></span>
     </div>{% endblock %}

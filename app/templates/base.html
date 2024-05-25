@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microblog{% if title %} | {{ title }}{% endif %}</title>
+    <title>{{ _('Microblog') }}{% if title %} | {{ title }}{% endif %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
@@ -17,23 +17,23 @@
             <div class="collapse navbar-collapse" id="collapseNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">{{ _('Home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">Explore</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">{{ _('Explore') }}</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if current_user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('signin') }}">Login</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('signin') }}">{{ _('Login') }}</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('profile', username=current_user.username) }}">Profile</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('profile', username=current_user.username) }}">{{ _('Profile') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url_for('signout') }}">Logout</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('signout') }}">{{ _('Logout') }}</a>
                     </li>
                   {% endif %}
                 </ul>
@@ -52,6 +52,7 @@
     <div>
         <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
         {{ moment.include_moment() }}
+        {{ moment.lang(g.locale) }}
     </div>
 </body>
 </html>
