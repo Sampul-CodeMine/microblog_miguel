@@ -7,3 +7,4 @@ MAIL_PORT=587
 MAIL_USE_TLS=True
 MAIL_USERNAME='sample@email.com'
 MAIL_PASSWORD='tester123'
+MS_TRANSLATOR_KEY='tjfdhdiwjdndmkdfdfdjkdf'

@@ -7,6 +7,7 @@ from flask_login import (current_user, login_user, logout_user,
 from flask_babel import _, get_locale
 import sqlalchemy as sa
 from app import app, db
+from app.translate import translate
 from app.models import User, Post
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
@@ -32,7 +33,8 @@ def index():
             language = detect(form.post.data)
         except LangDetectException:
             language = ''
-        post = Post(body=form.post.data, author=current_user)
+        post = Post(body=form.post.data, author=current_user,
+                    language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post was submitted and it is now live!'), 'success')
@@ -214,3 +216,12 @@ def reset_password(token):
         flash(_('Your password has been reset.'), 'success')
         return redirect(url_for('signin'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/translate', methods=['POST'], strict_slashes=False)
+@login_required
+def translate_text():
+    data = request.get_json()
+    return {
+        'text': translate(data['text'], data['source_language'], data['dest_language'])
+    }
